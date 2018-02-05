@@ -11,16 +11,16 @@ class paragon{
     }
     
     push(i,k){
-        if(!q[i])
-            c++;
-        q[i]=k;
-        if(c===n)
-            return resolv();
+        if(!this.q[i])
+            this.c++;
+        this.q[i]=k;
+        if(this.c===this.n)
+            return this.resolv();
         else
-            return c;
+            return this.c;
     }
     //as the expression depends on the dependencies noted in q; the expression will take q as a container for the parameters
     resolv(){
-        return exp(q);
+        return this.exp(this.q);
     }
 }
