@@ -1,13 +1,18 @@
 
-//using subscription pattern to resolve the problem of multiple aynsc dependencies
+//using subscriber pattern to resolve the problem of multiple aynsc dependencies
 
 class paragon{
     //requires the expression to be executed upon resolution and 
-    constructor(func_p, num_p, cur_p = 0, q_p = []){
+    constructor(func_p, num_p, cur_p = 0, q_p = [], callback = null){
         this.exp = func_p;
         this.n = num_p;
         this.c = cur_p;
         this.q = q_p;
+        this.cb = callback;
+        this.r = false; //whether wait is finished
+        if(this.c === this.n){
+            resolv();
+        }
     }
     
     push(i,k){
@@ -21,7 +26,14 @@ class paragon{
     }
     //as the expression depends on the dependencies noted in q; the expression will take q as a container for the parameters
     resolv(){
-        return this.exp(this.q);
+        this.val = this.exp(this.q);
+        this.r = true;
+        if(this.cb){//implementation of callback support
+            return this.cb(this.val);
+        }
+        else{
+            return this.val;
+        }
     }
 }
 
