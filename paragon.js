@@ -2,16 +2,22 @@
 
 class paragon{
     //requires the expression to be executed upon resolution and 
-    constructor(func_p, num_p, cur_p = 0, q_p = [], callback = null){
+    constructor(func_p, num_p, cur_p = 0, q_p = [], callback = null, rej = null, e_q = [], num_e = 1, cur_e = 0){
         this.exp = func_p;
         this.n = num_p;
         this.c = cur_p;
         this.q = q_p;
         this.res = callback;
-        this.rej;
+        this.rej = rej;
         this.r = false; //whether wait is finished
+        this.eq = e_q;
+        this.en = num_e;
+        this.ec = cur_e;
         if(this.c === this.n){
             resolv();
+        }
+        else if(this.ec === this.en){
+            reject();
         }
     }
     
@@ -24,6 +30,17 @@ class paragon{
         else
             return this.c;
     }
+    
+    err(i,k){
+        if(!this.eq[i])
+            this.ec++;
+        this.eq[i]=k;
+        if(this.ec===this.en)
+            return this.rej(this.eq);
+        else
+            return this.ec;
+    }
+    
     //used to attach resolve and reject calls. can also be used to bind callbacks
     promise(res,rej=null){
         this.res = res;
