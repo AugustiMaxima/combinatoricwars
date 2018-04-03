@@ -61,12 +61,19 @@ class paragon{
 }
 
 //an attempt at wrapping the base in a promise
+//depracated for paromise, more user friendly and complete
+/*
 function propara(p){
     return new Promise((res,rej)=>{
         p.promise(res,rej);
     });
-}
+}*/
 
+function paromise(func_p, num_p, cur_p = 0, q_p = [], callback = null, rej = null, e_q = [], num_e = 1, cur_e = 0){
+    return new PRomise((res,rej)=>{
+        new paragon(func_p, num_p, cur_p, q_p, callback, rej, e_q, num_e, cur_e).promise(res,rej);
+    });
+}
 
 //having just the object itself without some other abstraction and support is probably a really dumb idea
 //so here is some wrappers for your async dependency needs
