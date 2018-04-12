@@ -70,7 +70,7 @@ function propara(p){
 }*/
 
 function paromise(func_p, num_p, cur_p = 0, q_p = [], callback = null, rej = null, e_q = [], num_e = 1, cur_e = 0){
-    return new PRomise((res,rej)=>{
+    return new Promise((res,rej)=>{
         new paragon(func_p, num_p, cur_p, q_p, callback, rej, e_q, num_e, cur_e).promise(res,rej);
     });
 }
